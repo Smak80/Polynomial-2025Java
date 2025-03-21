@@ -66,4 +66,18 @@ public class Polynomial {
         return new Polynomial(sum);
     }
 
+    public Polynomial times(Polynomial other){
+        var prod = new TreeMap<Integer, Double>();
+        for (int tc: coef.keySet()){
+            for (int oc: other.coef.keySet()){
+                if (prod.containsKey(oc+tc)) {
+                    prod.put(tc + oc, coef.get(tc) * other.coef.get(oc) + prod.get(tc + oc));
+                } else {
+                    prod.put(tc + oc, coef.get(tc) * other.coef.get(oc));
+                }
+            }
+        }
+        return new Polynomial(prod);
+    }
+
 }
