@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class Polynomial {
-    private final SortedMap<Integer, Double> coef;
+    protected final SortedMap<Integer, Double> coef;
     public Polynomial() {
         coef = new TreeMap<Integer, Double>();
         clearIncorrect();
@@ -13,6 +13,14 @@ public class Polynomial {
     public Polynomial(@NotNull Map<Integer, Double> coef){
         this.coef = new TreeMap<Integer, Double>(coef);
         clearIncorrect();
+    }
+
+    public Polynomial(double []coef){
+        var tm = new TreeMap<Integer, Double>();
+        for (int i = 0; i < coef.length; i++){
+            tm.put(i, coef[i]);
+        }
+        this(tm);
     }
 
     public SortedMap<Integer, Double> getCoef() {
@@ -66,6 +74,18 @@ public class Polynomial {
         return new Polynomial(sum);
     }
 
+    public Polynomial minus(Polynomial other){
+        var sum = new TreeMap<>(coef);
+        for (var c: other.coef.keySet()){
+            if(sum.containsKey(c)){
+                sum.put(c, -other.coef.get(c) + sum.get(c));
+            } else {
+                sum.put(c, -other.coef.get(c));
+            }
+        }
+        return new Polynomial(sum);
+    }
+
     public Polynomial times(Polynomial other){
         var prod = new TreeMap<Integer, Double>();
         for (int tc: coef.keySet()){
@@ -79,5 +99,18 @@ public class Polynomial {
         }
         return new Polynomial(prod);
     }
+
+    public Polynomial times(double k){
+        var prod = new TreeMap<>(coef);
+        prod.replaceAll((c, v) -> v * k);
+        return new Polynomial(prod);
+    }
+
+    public Polynomial div(double k){
+        var prod = new TreeMap<>(coef);
+        prod.replaceAll((c, v) -> v / k);
+        return new Polynomial(prod);
+    }
+
 
 }

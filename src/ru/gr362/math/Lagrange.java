@@ -16,7 +16,8 @@ public class Lagrange extends Polynomial{
         for (var x: points.keySet()){
             p = p.plus(fundamental(x).times(points.get(x)));
         }
-        this.coeff = p.coeff;
+        coef.clear();
+        coef.putAll(p.coef);
     }
 
     private Polynomial fundamental(double x){

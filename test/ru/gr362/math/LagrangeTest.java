@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class LagrangeTest {
     @Test
     public void testConstructor() {
@@ -14,6 +16,6 @@ class LagrangeTest {
         double[] parametrs = new double[]{3.0};
         Polynomial pm = new Polynomial(parametrs);
 
-        assertArrayEquals(pm.coeff, lg.coeff);
+        assertEquals(pm, lg);
     }
 }
