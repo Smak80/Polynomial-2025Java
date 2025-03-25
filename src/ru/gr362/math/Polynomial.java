@@ -7,11 +7,11 @@ import java.util.*;
 public class Polynomial {
     protected final SortedMap<Integer, Double> coef;
     public Polynomial() {
-        coef = new TreeMap<Integer, Double>();
+        coef = new TreeMap<>();
         clearIncorrect();
     }
     public Polynomial(@NotNull Map<Integer, Double> coef){
-        this.coef = new TreeMap<Integer, Double>(coef);
+        this.coef = new TreeMap<>(coef);
         clearIncorrect();
     }
 
@@ -112,5 +112,14 @@ public class Polynomial {
         return new Polynomial(prod);
     }
 
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof Polynomial)) return false;
+        return ((Polynomial) other).coef.equals(coef);
+    }
 
+    @Override
+    public int hashCode(){
+        return coef.hashCode() * 31;
+    }
 }
